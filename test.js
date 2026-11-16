@@ -63,7 +63,7 @@ const PORT = 3000;
 async function main() {
     console.log("Test 1: sortObjects by tasksCompleted ascending.")
     try {
-        const asc = await fetch(`http://localhost:${PORT}/sortObjects`, {
+        const test1 = await fetch(`http://localhost:${PORT}/sortObjects`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -73,7 +73,7 @@ async function main() {
             })
         });
 
-        console.log('ASC:', await asc.json());
+        console.log('ASC:', await test1.json());
     } 
     catch (err) {
         console.error('Test call failed:', err.message);
@@ -81,7 +81,7 @@ async function main() {
 
     console.log("Test 2: sortObjects by non-existent field, error should be returned.")
     try {
-        const bad_call_1 = await fetch(`http://localhost:${PORT}/sortObjects`, {
+        const test2 = await fetch(`http://localhost:${PORT}/sortObjects`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -91,14 +91,14 @@ async function main() {
             })
         });
 
-        console.log(await bad_call_1.json());
+        console.log(await test2.json());
     }
     catch (err) {
         console.error('Test call failed:', err.message);
     }
     console.log("Test 3: priority ascending")
     try{
-        const test2 = await fetch(`http://localhost:${PORT}/priority`, {
+        const test3 = await fetch(`http://localhost:${PORT}/priority`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -107,14 +107,14 @@ async function main() {
             })
         });
         
-        console.log(await test2.json());
+        console.log(await test3.json());
     }
     catch (err) {
         console.error('Test call failed:', err.message)
     }
     console.log("Test 4: err list does not have priority field.")
     try{
-        const test2 = await fetch(`http://localhost:${PORT}/priority`, {
+        const test4 = await fetch(`http://localhost:${PORT}/priority`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -123,14 +123,14 @@ async function main() {
             })
         });
         
-        console.log(await test2.json());
+        console.log(await test4.json());
     }
     catch (err) {
         console.error('Test call failed:', err.message)
     }
     console.log("Test 5: sort list descending.")
     try{
-        const test2 = await fetch(`http://localhost:${PORT}/sort`, {
+        const test5 = await fetch(`http://localhost:${PORT}/sort`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -139,14 +139,14 @@ async function main() {
             })
         });
         
-        console.log(await test2.json());
+        console.log(await test5.json());
     }
     catch (err) {
         console.error('Test call failed:', err.message)
     }
     console.log("Test 6: err list must contain items of same type.")
     try{
-        const test2 = await fetch(`http://localhost:${PORT}/sort`, {
+        const test6 = await fetch(`http://localhost:${PORT}/sort`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -155,7 +155,7 @@ async function main() {
             })
         });
         
-        console.log(await test2.json());
+        console.log(await test6.json());
     }
     catch (err) {
         console.error('Test call failed:', err.message)
