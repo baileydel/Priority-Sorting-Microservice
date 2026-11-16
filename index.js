@@ -13,18 +13,77 @@ app.use(express.json());
  * Sory by int, priority is expected to be an int or dec
  */
 app.post('/priority', (req, res) => {
-    return res.status(404).json({
-        error: `Route not implemented yet`
-    });
+    const {priorityItems, order = 'asc'} = req.body;
+
+    // priorityItems must be an Array
+    if (!Array.isArray(priorityItems) || priorityItems.length == 0) {
+        return res.status(400).json({
+            error: "priorityItems must be an Array."
+        })
+    }
+
+    // priorityItems must have "priority" field.
+    if (typeof priorityItems[0]["priority"] === 'undefined') {
+        return res.status(400).json({
+            error: 'list does not have "priority" field.'
+        })
+    }
+
+    const sorted = [...priorityItems].sort((a,b) => {
+
+        const a_Field = a["priority"]
+        const b_Field = b["priority"]
+
+        let result = undefined;
+
+        //Priority must be int or dec
+        if (typeof a_Field != 'number'){
+            return res.status(400).json({
+                error: "priority field must contain int or dec."
+            })
+        } else {
+            result = a_Field - b_Field;
+        }
+
+        return order === 'desc' ? -result : result
+    })
+
+    res.status(200).json({order, priorityItems: sorted})
 });
 
 /**
  * This is for sorting a plain list.
  */
 app.post('/sort', (req, res) => {
-    return res.status(404).json({
-        error: `Route not implemented yet`
-    });
+    const {items, order ='asc'} = req.body;
+
+    // items must be an Array
+    if (!Array.isArray(items) || items.length == 0) {
+        return res.status(400).json({
+            error: "items must be an Array"
+        })
+    }
+
+    const sorted = items.sort((a,b) => {
+        if (typeof a != typeof b){
+            return res.status(400).json({
+                error: 'list must contain items of same type'
+            })
+        }
+        if (typeof a === 'number') {
+            result = a - b;
+        }
+        else if (!isNaN(Date.parse(a))){
+            result = new Date(a) - new Date(b);
+
+        }
+        else {
+            result = String(a).localeCompare(String(b))
+        }
+        return order === 'desc' ? -result : result
+    })
+
+    res.status(200).json({order, items: sorted})
 });
 
 /**
@@ -62,9 +121,14 @@ app.post('/sortObjects', (req, res) => {
         const b_Field = b[sortBy];
 
         let result = undefined;
-
+        // Must contain values of same type
+        if (typeof a_Field != typeof b_Field) {
+            res.status(400).json({
+                error: "Values being sorted must be of same type."
+            })
+        }
         // For now only support Numbers, Dates, Strings
-        if (typeof x === 'number') {
+        if (typeof a_Field === 'number') {
             result = a_Field - b_Field;
         }
         else if (!isNaN(Date.parse(a_Field))) {

@@ -1,0 +1,484 @@
+#This test should successfully return items sorted by tasksCompleted ascending.
+POST http://localhost:3000/sortObjects HTTP/1.1
+content-type: application/json
+
+{
+    "items": [{
+        "id": 1,
+        "name": "Lucas",
+        "role": "Frontend",
+        "email": "lucas@example.com",
+        "joinedDate": "2026-09-28",
+        "tasksCompleted": 7,
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "Bailey",
+        "role": "Backend",
+        "email": "bailey@example.com",
+        "joinedDate": "2026-09-24",
+        "tasksCompleted": 12,
+        "active": true
+    },
+    {
+        "id": 3,
+        "name": "Corson",
+        "role": "Testing",
+        "email": "corson@example.com",
+        "joinedDate": "2026-10-05",
+        "tasksCompleted": 9,
+        "active": false
+    }],
+    "sortBy": "tasksCompleted",
+    "order": "asc"
+}
+
+###
+
+#This test should successfully return items sorted by tasksCompleted descending.
+POST http://localhost:3000/sortObjects HTTP/1.1
+content-type: application/json
+
+{
+    "items": [{
+        "id": 1,
+        "name": "Lucas",
+        "role": "Frontend",
+        "email": "lucas@example.com",
+        "joinedDate": "2026-09-28",
+        "tasksCompleted": 7,
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "Bailey",
+        "role": "Backend",
+        "email": "bailey@example.com",
+        "joinedDate": "2026-09-24",
+        "tasksCompleted": 12,
+        "active": true
+    },
+    {
+        "id": 3,
+        "name": "Corson",
+        "role": "Testing",
+        "email": "corson@example.com",
+        "joinedDate": "2026-10-05",
+        "tasksCompleted": 9,
+        "active": false
+    }],
+    "sortBy": "tasksCompleted",
+    "order": "desc"
+}
+###
+
+#This test should successfully return items sorted by joinDate ascending.
+POST http://localhost:3000/sortObjects HTTP/1.1
+content-type: application/json
+
+{
+    "items": [{
+        "id": 1,
+        "name": "Lucas",
+        "role": "Frontend",
+        "email": "lucas@example.com",
+        "joinedDate": "2026-09-28",
+        "tasksCompleted": 7,
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "Bailey",
+        "role": "Backend",
+        "email": "bailey@example.com",
+        "joinedDate": "2026-09-24",
+        "tasksCompleted": 12,
+        "active": true
+    },
+    {
+        "id": 3,
+        "name": "Corson",
+        "role": "Testing",
+        "email": "corson@example.com",
+        "joinedDate": "2026-10-05",
+        "tasksCompleted": 9,
+        "active": false
+    }],
+    "sortBy": "joinedDate",
+    "order": "asc"
+}
+
+###
+
+#This test should successfuly return items sorted by joinDate descending.
+POST http://localhost:3000/sortObjects HTTP/1.1
+content-type: application/json
+
+{
+    "items": [{
+        "id": 1,
+        "name": "Lucas",
+        "role": "Frontend",
+        "email": "lucas@example.com",
+        "joinedDate": "2026-09-28",
+        "tasksCompleted": 7,
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "Bailey",
+        "role": "Backend",
+        "email": "bailey@example.com",
+        "joinedDate": "2026-09-24",
+        "tasksCompleted": 12,
+        "active": true
+    },
+    {
+        "id": 3,
+        "name": "Corson",
+        "role": "Testing",
+        "email": "corson@example.com",
+        "joinedDate": "2026-10-05",
+        "tasksCompleted": 9,
+        "active": false
+    }],
+    "sortBy": "joinedDate",
+    "order": "desc"
+}
+###
+
+#This test should return error: items must be an Array with Objects.
+POST http://localhost:3000/sortObjects HTTP/1.1
+content-type: application/json
+
+{
+    "items": 3,
+    "sortBy": "id",
+    "order": "desc"
+}
+###
+
+#This test should return error: "Values being sorted must be of same type"
+POST http://localhost:3000/sortObjects HTTP/1.1
+content-type: application/json
+
+{
+    "items": [{
+        "id": 1,
+        "name": "Lucas",
+        "role": "Frontend",
+        "email": "lucas@example.com",
+        "joinedDate": "2026-09-28",
+        "tasksCompleted": 7,
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "Bailey",
+        "role": "Backend",
+        "email": "bailey@example.com",
+        "joinedDate": "2026-09-24",
+        "tasksCompleted": 12,
+        "active": true
+    },
+    {
+        "id": 3,
+        "name": "Corson",
+        "role": "Testing",
+        "email": "corson@example.com",
+        "joinedDate": 3,
+        "tasksCompleted": 9,
+        "active": false
+    }],
+    "sortBy": "joinedDate",
+    "order": "desc"
+}
+
+###
+
+#This test should return error: Object list does not contain the field tenure.
+POST http://localhost:3000/sortObjects HTTP/1.1
+content-type: application/json
+
+{
+    "items": [{
+        "id": 1,
+        "name": "Lucas",
+        "role": "Frontend",
+        "email": "lucas@example.com",
+        "joinedDate": "2026-09-28",
+        "tasksCompleted": 7,
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "Bailey",
+        "role": "Backend",
+        "email": "bailey@example.com",
+        "joinedDate": "2026-09-24",
+        "tasksCompleted": 12,
+        "active": true
+    },
+    {
+        "id": 3,
+        "name": "Corson",
+        "role": "Testing",
+        "email": "corson@example.com",
+        "joinedDate": "2026-10-05",
+        "tasksCompleted": 9,
+        "active": false
+    }],
+    "sortBy": "tenure",
+    "order": "desc"
+}
+###
+
+#This test should return error: sortBy is not a valid String.
+POST http://localhost:3000/sortObjects HTTP/1.1
+content-type: application/json
+
+{
+    "items": [{
+        "id": 1,
+        "name": "Lucas",
+        "role": "Frontend",
+        "email": "lucas@example.com",
+        "joinedDate": "2026-09-28",
+        "tasksCompleted": 7,
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "Bailey",
+        "role": "Backend",
+        "email": "bailey@example.com",
+        "joinedDate": "2026-09-24",
+        "tasksCompleted": 12,
+        "active": true
+    },
+    {
+        "id": 3,
+        "name": "Corson",
+        "role": "Testing",
+        "email": "corson@example.com",
+        "joinedDate": "2026-10-05",
+        "tasksCompleted": 9,
+        "active": false
+    }],
+    "sortBy": 3,
+    "order": "desc"
+}
+
+###
+#This test should successfully return items sorted by priority ascending.
+POST http://localhost:3000/priority HTTP/1.1
+content-type: application/json
+
+{   
+    "priorityItems": [ 
+    {
+        "item": {
+            "id": 1,
+            "name": "Test",
+            "boolean": true
+        },
+        "priority": 2
+
+    },
+    {
+        "item": {
+            "id": 2,
+            "name": "Another Test",
+            "boolean": true
+        },
+        "priority": 1
+    },
+    {
+        "item": {
+            "id": 3,
+            "name": "Again",
+            "boolean": false
+        },
+        "priority": 4
+    },
+    {
+        "item": {
+            "id": 4,
+            "name": "One More",
+            "boolean": true
+        },
+        "priority": 3
+    }],
+    "order": "asc"
+    
+}
+
+###
+
+#This test should successfully return items sorted by priority descending.
+
+POST http://localhost:3000/priority HTTP/1.1
+content-type: application/json
+
+{   
+    "priorityItems": [ 
+    {
+        "item": {
+            "id": 1,
+            "name": "Test",
+            "boolean": true
+        },
+        "priority": 2
+
+    },
+    {
+        "item": {
+            "id": 2,
+            "name": "Another Test",
+            "boolean": true
+        },
+        "priority": 1
+    },
+    {
+        "item": {
+            "id": 3,
+            "name": "Again",
+            "boolean": false
+        },
+        "priority": 4
+    },
+    {
+        "item": {
+            "id": 4,
+            "name": "One More",
+            "boolean": true
+        },
+        "priority": 3
+    }],
+    "order": "desc"
+    
+}
+
+###
+
+#This test should return error: list does not have "priority" field
+
+POST http://localhost:3000/priority HTTP/1.1
+content-type: application/json
+
+{   
+    "priorityItems": [ 
+    {
+        "item": {
+            "id": 1,
+            "name": "Test",
+            "boolean": true
+        }
+    },
+    {
+        "item": {
+            "id": 2,
+            "name": "Another Test",
+            "boolean": true
+        }
+    },
+    {
+        "item": {
+            "id": 3,
+            "name": "Again",
+            "boolean": false
+        }
+    },
+    {
+        "item": {
+            "id": 4,
+            "name": "One More",
+            "boolean": true
+        }
+    }],
+    "order": "desc"
+    
+}
+
+###
+
+#This test should return error: priority field must contain int or dec
+
+POST http://localhost:3000/priority HTTP/1.1
+content-type: application/json
+
+{   
+    "priorityItems": [ 
+    {
+        "item": {
+            "id": 1,
+            "name": "Test",
+            "boolean": true
+        },
+        "priority": "asdf"
+
+    },
+    {
+        "item": {
+            "id": 2,
+            "name": "Another Test",
+            "boolean": true
+        },
+        "priority": "o"
+    },
+    {
+        "item": {
+            "id": 3,
+            "name": "Again",
+            "boolean": false
+        },
+        "priority": ""
+    },
+    {
+        "item": {
+            "id": 4,
+            "name": "One More",
+            "boolean": true
+        },
+        "priority": "3"
+    }],
+    "order": "desc"
+    
+}
+
+###
+
+#This test should successfully return list sorted ascending.
+POST http://localhost:3000/sort HTTP/1.1
+content-type: application/json
+
+{   
+    "items": [3,2,9,5,0,10,81],
+    "order": "asc"
+    
+}
+
+###
+
+#This test should successfully return list sorted descending.
+POST http://localhost:3000/sort HTTP/1.1
+content-type: application/json
+
+{   
+    "items": [3,2,9,5,0,10,81],
+    "order": "desc"
+    
+}
+###
+
+#This test should return error: list must contain items of same type.
+
+POST http://localhost:3000/sort HTTP/1.1
+content-type: application/json
+
+{   
+    "items": [3, "a"],
+    "order": "asc"
+    
+}
