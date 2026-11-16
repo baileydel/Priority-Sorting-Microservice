@@ -1,4 +1,4 @@
-# Validation Microservice
+# Priority/Sorting Microservice
 
 ## Authors
 Bailey, Corson, Lucas
@@ -8,7 +8,7 @@ Bailey, Corson, Lucas
 
 ## Setup
 
-Install dependancies
+Install dependencies
 ```
      npm install
 ```
@@ -76,3 +76,4 @@ console.log(await example_sort.json())
 ```
 ## UML Diagram
 
+![Priority/Sorting service sequence diagram](priority-sorting-sequence.png)
