@@ -24,6 +24,9 @@ Run test script
 
 ## Description
 This microservice takes either a list of Objects, or a simple list, and outputs a sorted version.
+To request data, you must send an HTTP requests with the POST method to one of the three routes listed below.
+To receive the data, you must declare a variable that reads the response from the request (which will be a JSON object.)
+
 There are three ways to use this service:
 
 ## 1. Sorting by field.
